@@ -1,0 +1,42 @@
+{{ $re := $.File.BaseFileName }}
+{{ $backlinks := slice }}
+{{ range .Site.AllPages }}
+   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+      {{ $backlinks = $backlinks | append . }}
+   {{ end }}
+{{ end }}
+
+<hr>
+{{ if gt (len $backlinks) 0 }}
+  <div class="bl-section">
+    <h4>Links to here</h4>
+    <div class="backlinks">
+      <ul>
+       {{ range $backlinks }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+       {{ end }}
+     </ul>
+    </div>
+  </div>
+{{ else  }}
+  <div class="bl-section">
+    <h4>Nowhere else links to here</h4>
+  </div>
+{{ end }}
+
+<!-- {{ $parentPage := . }}
+<h1>Referenced by:</h1>
+<ul>
+{{ range .Site.RegularPages }}
+  {{ $page := . }}
+  {{ range .Params.linkedArticles}}
+  {{ $linkedPage := $parentPage.GetPage .}}
+    {{ if eq $linkedPage $parentPage }}
+  <li>
+    <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+  </li>
+    {{ end }}
+  {{ end }}
+{{ end }}
+</ul>
+-->
