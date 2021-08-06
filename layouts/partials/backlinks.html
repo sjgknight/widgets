@@ -9,7 +9,7 @@
 <hr>
 {{ if gt (len $backlinks) 0 }}
   <div class="bl-section">
-    <h4>Links to here</h4>
+    <h4>Links to this note</h4>
     <div class="backlinks">
       <ul>
        {{ range $backlinks }}
@@ -23,20 +23,3 @@
     <h4>Nowhere else links to here</h4>
   </div>
 {{ end }}
-
-<!-- {{ $parentPage := . }}
-<h1>Referenced by:</h1>
-<ul>
-{{ range .Site.RegularPages }}
-  {{ $page := . }}
-  {{ range .Params.linkedArticles}}
-  {{ $linkedPage := $parentPage.GetPage .}}
-    {{ if eq $linkedPage $parentPage }}
-  <li>
-    <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
-  </li>
-    {{ end }}
-  {{ end }}
-{{ end }}
-</ul>
--->
